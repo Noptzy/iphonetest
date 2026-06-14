@@ -1,14 +1,10 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router"
+import { useRouter } from "@tanstack/react-router"
 import { Card } from "@web/components/card.tsx"
 import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
 import { AdminOrderActions } from "@web/features/orders/components/AdminOrderActions.tsx"
 import { PaymentProofUpload } from "@web/features/orders/components/PaymentProofUpload.tsx"
 import { useOrderDetail } from "@web/features/orders/queries/use-order-detail.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
-
-export const Route = createFileRoute("/_authenticated/orders/$id")({
-	component: OrderDetailPage,
-})
 
 const bankAccount = {
 	bank: "BCA",
@@ -106,8 +102,7 @@ function BankTransferInstructions({
 	)
 }
 
-function OrderDetailPage() {
-	const { id } = Route.useParams()
+export function OrderDetail({ id }: { id: string }) {
 	const isAdmin = useRouter().options.context.user?.role === "admin"
 	const { data: order, isLoading, refetch } = useOrderDetail(id)
 

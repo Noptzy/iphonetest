@@ -32,7 +32,7 @@ function RootLayout() {
 									Catalog
 								</Link>
 								<Link
-									to="/login"
+									to="/auth/login"
 									className="rounded-full bg-black px-4 py-1.5 text-white hover:bg-slate-800 transition-colors"
 								>
 									Sign in

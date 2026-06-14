@@ -1,13 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
 import { useMyOrders } from "@web/features/orders/queries/use-my-orders.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
-export const Route = createFileRoute("/_authenticated/orders/")({
-	component: MyOrdersPage,
-})
-
-function MyOrdersPage() {
+export function MyOrders() {
 	const { data: orders, isLoading } = useMyOrders()
 
 	if (isLoading) return <p className="text-slate-500">Loading orders…</p>

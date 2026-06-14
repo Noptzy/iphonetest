@@ -1,23 +1,18 @@
 import { useForm } from "@tanstack/react-form"
-import { createFileRoute, Link } from "@tanstack/react-router"
-import { useRegister } from "@web/features/auth/mutations/use-register.ts"
-import { registerSchema } from "@web/features/auth/schemas/auth.schema.ts"
+import { Link } from "@tanstack/react-router"
+import { useLogin } from "@web/features/auth/mutations/use-login.ts"
+import { loginSchema } from "@web/features/auth/schemas/auth.schema.ts"
 
-export const Route = createFileRoute("/register")({
-	component: RegisterPage,
-})
-
-function RegisterPage() {
-	const register = useRegister()
+export function LoginForm() {
+	const login = useLogin()
 
 	const form = useForm({
 		defaultValues: {
-			name: "",
 			email: "",
 			password: "",
 		},
 		onSubmit: async ({ value }) => {
-			await register.mutateAsync(value)
+			await login.mutateAsync(value)
 		},
 	})
 
@@ -32,31 +27,13 @@ function RegisterPage() {
 				className="w-full max-w-md space-y-6 bg-white p-8 md:p-10 rounded-[2rem] shadow-sm border border-slate-100"
 			>
 				<div className="text-center mb-8">
-					<h1 className="text-3xl font-semibold tracking-tight">Create account</h1>
-					<p className="text-slate-500 mt-2">Join us to start shopping.</p>
+					<h1 className="text-3xl font-semibold tracking-tight">Sign in</h1>
+					<p className="text-slate-500 mt-2">Welcome back to the store.</p>
 				</div>
 				<div className="space-y-4">
 					<form.Field
-						name="name"
-						validators={{ onChange: registerSchema.shape.name }}
-						children={(field) => (
-							<div>
-								<input
-									placeholder="Name"
-									value={field.state.value}
-									onChange={(e) => field.handleChange(e.target.value)}
-									onBlur={field.handleBlur}
-									className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0071e3]/50 transition-all"
-								/>
-								{field.state.meta.errors ? (
-									<p className="text-xs text-red-500 mt-1">{field.state.meta.errors.join(", ")}</p>
-								) : null}
-							</div>
-						)}
-					/>
-					<form.Field
 						name="email"
-						validators={{ onChange: registerSchema.shape.email }}
+						validators={{ onChange: loginSchema.shape.email }}
 						children={(field) => (
 							<div>
 								<input
@@ -75,12 +52,12 @@ function RegisterPage() {
 					/>
 					<form.Field
 						name="password"
-						validators={{ onChange: registerSchema.shape.password }}
+						validators={{ onChange: loginSchema.shape.password }}
 						children={(field) => (
 							<div>
 								<input
 									type="password"
-									placeholder="Password (min 8 chars)"
+									placeholder="Password"
 									value={field.state.value}
 									onChange={(e) => field.handleChange(e.target.value)}
 									onBlur={field.handleBlur}
@@ -93,8 +70,8 @@ function RegisterPage() {
 						)}
 					/>
 				</div>
-				{register.error ? (
-					<p className="text-sm text-red-600 text-center">{register.error.message}</p>
+				{login.error ? (
+					<p className="text-sm text-red-600 text-center">{login.error.message}</p>
 				) : null}
 
 				<form.Subscribe
@@ -105,15 +82,15 @@ function RegisterPage() {
 							disabled={!canSubmit || isSubmitting}
 							className="w-full rounded-full bg-black px-4 py-3.5 font-medium text-white hover:bg-slate-800 disabled:opacity-50 transition-colors"
 						>
-							{isSubmitting ? "Creating…" : "Create account"}
+							{isSubmitting ? "Signing in…" : "Sign in"}
 						</button>
 					)}
 				/>
 
 				<p className="text-center text-sm text-slate-500 mt-6">
-					Already registered?{" "}
-					<Link to="/login" className="font-medium text-[#0071e3] hover:underline">
-						Sign in
+					No account?{" "}
+					<Link to="/auth/register" className="font-medium text-[#0071e3] hover:underline">
+						Register
 					</Link>
 				</p>
 			</form>

@@ -3,7 +3,7 @@ import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
 import { useAdminOrders } from "@web/features/orders/queries/use-admin-orders.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
-export const Route = createFileRoute("/_authenticated/admin/orders")({
+export const Route = createFileRoute("/_authenticated/admin/orders/")({
 	component: AdminOrdersPage,
 })
 

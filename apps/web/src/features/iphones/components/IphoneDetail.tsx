@@ -1,15 +1,10 @@
-import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router"
+import { useNavigate, useRouter } from "@tanstack/react-router"
 import { ConditionBadge } from "@web/components/condition-badge.tsx"
 import { useIphoneDetail } from "@web/features/iphones/queries/use-iphone-detail.ts"
 import { useCreateOrder } from "@web/features/orders/mutations/use-create-order.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
-export const Route = createFileRoute("/iphone/$id")({
-	component: IphoneDetailPage,
-})
-
-function IphoneDetailPage() {
-	const { id } = Route.useParams()
+export function IphoneDetail({ id }: { id: string }) {
 	const navigate = useNavigate()
 	const user = useRouter().options.context.user
 	const { data: iphone, isLoading } = useIphoneDetail(id)
@@ -85,7 +80,7 @@ function IphoneDetailPage() {
 							<p className="text-sm text-slate-600 mb-3">Please sign in to buy this iPhone.</p>
 							<button
 								type="button"
-								onClick={() => navigate({ to: "/login" })}
+								onClick={() => navigate({ to: "/auth/login" })}
 								className="rounded-full bg-black px-6 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors"
 							>
 								Sign in
