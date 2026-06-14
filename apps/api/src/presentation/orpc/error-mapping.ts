@@ -1,4 +1,4 @@
-import type { AppErrorCode } from "../../application/shared/errors.ts"
+import type { AppErrorCode } from "@/application/shared/errors.ts"
 
 interface MappedError {
 	code: "UNAUTHORIZED" | "FORBIDDEN" | "NOT_FOUND" | "BAD_REQUEST" | "CONFLICT" | "INTERNAL_SERVER_ERROR"

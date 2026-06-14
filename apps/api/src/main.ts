@@ -1,23 +1,22 @@
 import { serve } from "@hono/node-server"
-import { serveStatic } from "@hono/node-server/serve-static"
 import { promises as fs } from "node:fs"
 import { extname } from "node:path"
 import { RPCHandler } from "@orpc/server/fetch"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
-import { buildUseCases } from "./application/use-cases.ts"
-import { createAuthService } from "./infrastructure/auth/auth-service.ts"
-import { buildAuth } from "./infrastructure/auth/better-auth.ts"
-import { env } from "./infrastructure/config/env.ts"
-import { createDb } from "./infrastructure/db/client.ts"
-import { createIphoneRepository } from "./infrastructure/db/repositories/iphone/iphone-repository.ts"
-import { createOrderRepository } from "./infrastructure/db/repositories/order/order-repository.ts"
-import { logger } from "./infrastructure/observability/logger.ts"
-import { createLocalFileStorage } from "./infrastructure/storage/local-file-storage.ts"
-import { buildUploadRoute } from "./presentation/http/upload-route.ts"
-import { buildRouter } from "./presentation/routers/index.ts"
+import { buildUseCases } from "@/application/use-cases.ts"
+import { createAuthService } from "@/infrastructure/auth/auth-service.ts"
+import { buildAuth } from "@/infrastructure/auth/better-auth.ts"
+import { env } from "@/infrastructure/config/env.ts"
+import { createDb } from "@/infrastructure/db/client.ts"
+import { createIphoneRepository } from "@/infrastructure/db/repositories/iphone/iphone-repository.ts"
+import { createOrderRepository } from "@/infrastructure/db/repositories/order/order-repository.ts"
+import { logger } from "@/infrastructure/observability/logger.ts"
+import { createLocalFileStorage } from "@/infrastructure/storage/local-file-storage.ts"
+import { buildUploadRoute } from "@/presentation/http/upload-route.ts"
+import { buildRouter } from "@/presentation/routers/index.ts"
 
-// --- compose infrastructure ---
+
 const db = createDb(env.DATABASE_URL)
 const auth = buildAuth(db)
 const authService = createAuthService(auth)
@@ -25,12 +24,10 @@ const fileStorage = createLocalFileStorage(env.UPLOAD_DIR)
 const iphoneRepo = createIphoneRepository(db)
 const orderRepo = createOrderRepository(db)
 
-// --- compose application + presentation ---
 const useCases = buildUseCases({ iphoneRepo, orderRepo })
 const router = buildRouter(useCases)
 const rpcHandler = new RPCHandler(router)
 
-// --- http server ---
 const app = new Hono()
 
 app.use("*", cors({ origin: env.WEB_ORIGIN, credentials: true }))

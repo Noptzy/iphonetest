@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto"
 import { eq } from "drizzle-orm"
-import type { Order, OrderStatus } from "../../../../domain/order/order.ts"
-import type { CreateOrderInput } from "../../../../domain/order/order-repository.ts"
-import type { Database } from "../../client.ts"
-import { order } from "../../schema.ts"
-import { mapRowToOrder } from "./order-row-mapper.ts"
+import type { Order, OrderStatus } from "@/domain/order/order.ts"
+import type { CreateOrderInput } from "@/domain/order/order-repository.ts"
+import type { Database } from "@/infrastructure/db/client.ts"
+import { order } from "@/infrastructure/db/schema.ts"
+import { mapRowToOrder } from "@/infrastructure/db/repositories/order/order-row-mapper.ts"
 
 export function makeOrderWriteCommands(db: Database) {
 	return {

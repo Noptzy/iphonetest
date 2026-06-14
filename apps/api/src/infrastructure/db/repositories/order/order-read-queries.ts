@@ -1,8 +1,8 @@
 import { desc, eq } from "drizzle-orm"
-import type { Order } from "../../../../domain/order/order.ts"
-import type { Database } from "../../client.ts"
-import { order } from "../../schema.ts"
-import { mapRowToOrder } from "./order-row-mapper.ts"
+import type { Order } from "@/domain/order/order.ts"
+import type { Database } from "@/infrastructure/db/client.ts"
+import { order } from "@/infrastructure/db/schema.ts"
+import { mapRowToOrder } from "@/infrastructure/db/repositories/order/order-row-mapper.ts"
 
 export function makeOrderReadQueries(db: Database) {
 	return {

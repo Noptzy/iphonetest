@@ -1,6 +1,6 @@
-import type { UseCases } from "../../application/use-cases.ts"
-import { adminProcedure, publicProcedure } from "../orpc/middleware.ts"
-import { createIphoneSchema, idSchema, updateIphoneSchema } from "../orpc/schemas.ts"
+import type { UseCases } from "@/application/use-cases.ts"
+import { adminProcedure, publicProcedure } from "@/presentation/orpc/middleware.ts"
+import { createIphoneSchema, idSchema, updateIphoneSchema } from "@/presentation/orpc/schemas.ts"
 
 /** Browsing the catalog is public; mutations are admin-only. */
 export function buildIphoneRouter(iphone: UseCases["iphone"]) {

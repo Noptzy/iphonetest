@@ -1,12 +1,11 @@
-import type { OrderRepository } from "../../domain/order/order-repository.ts"
-import { badRequest, notFound } from "../shared/errors.ts"
+import type { OrderRepository } from "@/domain/order/order-repository.ts"
+import { badRequest, notFound } from "@/application/shared/errors.ts"
 
 export interface RejectOrderInput {
 	id: string
 	reason: string
 }
 
-/** Admin rejects the transfer proof (e.g. wrong amount); buyer may re-upload. */
 export function makeRejectOrder(orderRepo: OrderRepository) {
 	return async (input: RejectOrderInput) => {
 		const order = await orderRepo.findById(input.id)

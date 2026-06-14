@@ -1,5 +1,5 @@
-import type { IphoneRepository } from "../../domain/iphone/iphone-repository.ts"
-import { notFound } from "../shared/errors.ts"
+import type { IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
+import { notFound } from "@/application/shared/errors.ts"
 
 export function makeGetIphone(iphoneRepo: IphoneRepository) {
 	return async (input: { id: string }) => {

@@ -1,13 +1,12 @@
-import type { IphoneRepository } from "../../domain/iphone/iphone-repository.ts"
-import type { OrderRepository } from "../../domain/order/order-repository.ts"
-import { badRequest, conflict, notFound } from "../shared/errors.ts"
+import type { IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
+import type { OrderRepository } from "@/domain/order/order-repository.ts"
+import { badRequest, conflict, notFound } from "@/application/shared/errors.ts"
 
 export interface ConfirmOrderDeps {
 	iphoneRepo: IphoneRepository
 	orderRepo: OrderRepository
 }
 
-/** Admin verifies the uploaded transfer, then stock is decremented atomically. */
 export function makeConfirmOrder(deps: ConfirmOrderDeps) {
 	return async (input: { id: string }) => {
 		const order = await deps.orderRepo.findById(input.id)

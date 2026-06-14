@@ -1,6 +1,6 @@
-import type { AuthService, Session } from "../../domain/ports/auth-service.ts"
-import type { AppRole, User } from "../../domain/user/user.ts"
-import type { Auth } from "./better-auth.ts"
+import type { AuthService, Session } from "@/domain/ports/auth-service.ts"
+import type { AppRole, User } from "@/domain/user/user.ts"
+import type { Auth } from "@/infrastructure/auth/better-auth.ts"
 
 export function createAuthService(auth: Auth): AuthService {
 	return {

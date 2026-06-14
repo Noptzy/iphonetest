@@ -1,8 +1,7 @@
-import type { Order } from "../../domain/order/order.ts"
-import type { AuthedContext } from "../shared/context.ts"
-import { forbidden } from "../shared/errors.ts"
+import type { Order } from "@/domain/order/order.ts"
+import type { AuthedContext } from "@/application/shared/context.ts"
+import { forbidden } from "@/application/shared/errors.ts"
 
-/** Admins may touch any order; a regular user may only touch their own. */
 export function assertCanAccessOrder(order: Order, ctx: AuthedContext) {
 	const isAdmin = ctx.session.user.role === "admin"
 	const isOwner = order.userId === ctx.session.user.id

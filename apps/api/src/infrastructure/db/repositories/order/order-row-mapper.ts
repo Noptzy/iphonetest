@@ -1,5 +1,5 @@
-import type { Order, OrderStatus } from "../../../../domain/order/order.ts"
-import type { order } from "../../schema.ts"
+import type { Order, OrderStatus } from "@/domain/order/order.ts"
+import type { order } from "@/infrastructure/db/schema.ts"
 
 export type OrderRow = typeof order.$inferSelect
 

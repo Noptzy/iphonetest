@@ -1,7 +1,5 @@
 import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
-// --- better-auth core tables ---
-
 export const user = pgTable("user", {
 	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
 	name: text("name").notNull(),
@@ -52,8 +50,6 @@ export const verification = pgTable("verification", {
 	createdAt: timestamp("created_at").notNull().defaultNow(),
 	updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
-
-// --- application tables ---
 
 export const iphone = pgTable("iphone", {
 	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),

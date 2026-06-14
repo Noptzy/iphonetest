@@ -1,7 +1,7 @@
-import type { OrderRepository } from "../../domain/order/order-repository.ts"
-import type { AuthedContext } from "../shared/context.ts"
-import { badRequest, notFound } from "../shared/errors.ts"
-import { assertCanAccessOrder } from "./order-access-rule.ts"
+import type { OrderRepository } from "@/domain/order/order-repository.ts"
+import type { AuthedContext } from "@/application/shared/context.ts"
+import { badRequest, notFound } from "@/application/shared/errors.ts"
+import { assertCanAccessOrder } from "@/application/order/order-access-rule.ts"
 
 export function makeCancelOrder(orderRepo: OrderRepository) {
 	return async (input: { id: string }, ctx: AuthedContext) => {

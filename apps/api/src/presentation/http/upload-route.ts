@@ -1,6 +1,6 @@
 import { Hono, type Context } from "hono"
-import type { AuthService } from "../../domain/ports/auth-service.ts"
-import type { FileStorage } from "../../domain/ports/file-storage.ts"
+import type { AuthService } from "@/domain/ports/auth-service.ts"
+import type { FileStorage } from "@/domain/ports/file-storage.ts"
 
 /** Handles file uploads — payment receipts and product images. */
 export function buildUploadRoute(fileStorage: FileStorage, authService: AuthService) {

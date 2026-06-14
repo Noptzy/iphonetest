@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm"
-import type { Database } from "../../client.ts"
-import { iphone } from "../../schema.ts"
+import type { Database } from "@/infrastructure/db/client.ts"
+import { iphone } from "@/infrastructure/db/schema.ts"
 
 export function makeIphoneStockCommand(db: Database) {
 	return {

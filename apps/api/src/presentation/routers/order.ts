@@ -1,6 +1,6 @@
-import type { UseCases } from "../../application/use-cases.ts"
-import { adminProcedure, protectedProcedure, toAuthedContext } from "../orpc/middleware.ts"
-import { idSchema, placeOrderSchema, rejectOrderSchema, uploadProofSchema } from "../orpc/schemas.ts"
+import type { UseCases } from "@/application/use-cases.ts"
+import { adminProcedure, protectedProcedure, toAuthedContext } from "@/presentation/orpc/middleware.ts"
+import { idSchema, placeOrderSchema, rejectOrderSchema, uploadProofSchema } from "@/presentation/orpc/schemas.ts"
 
 /** Buyers manage their own orders; admins verify payments and progress fulfilment. */
 export function buildOrderRouter(order: UseCases["order"]) {

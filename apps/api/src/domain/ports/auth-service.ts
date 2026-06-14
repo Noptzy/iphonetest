@@ -1,4 +1,4 @@
-import type { AppRole, User } from "../user/user.ts"
+import type { AppRole, User } from "@/domain/user/user.ts"
 
 export interface SessionUser {
 	id: string

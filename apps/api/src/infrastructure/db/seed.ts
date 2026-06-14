@@ -1,11 +1,11 @@
 import { eq } from "drizzle-orm"
-import { buildAuth } from "../auth/better-auth.ts"
-import { env } from "../config/env.ts"
-import { logger } from "../observability/logger.ts"
-import { createDb } from "./client.ts"
-import { createIphoneRepository } from "./repositories/iphone/iphone-repository.ts"
-import { buildIphoneCatalog } from "./seed-data.ts"
-import { user } from "./schema.ts"
+import { buildAuth } from "@/infrastructure/auth/better-auth.ts"
+import { env } from "@/infrastructure/config/env.ts"
+import { logger } from "@/infrastructure/observability/logger.ts"
+import { createDb } from "@/infrastructure/db/client.ts"
+import { createIphoneRepository } from "@/infrastructure/db/repositories/iphone/iphone-repository.ts"
+import { buildIphoneCatalog } from "@/infrastructure/db/seed-data.ts"
+import { user } from "@/infrastructure/db/schema.ts"
 
 const db = createDb(env.DATABASE_URL)
 const auth = buildAuth(db)

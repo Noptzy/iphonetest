@@ -1,7 +1,7 @@
-import type { IphoneRepository } from "../../domain/iphone/iphone-repository.ts"
-import type { OrderRepository } from "../../domain/order/order-repository.ts"
-import type { AuthedContext } from "../shared/context.ts"
-import { badRequest, notFound } from "../shared/errors.ts"
+import type { IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
+import type { OrderRepository } from "@/domain/order/order-repository.ts"
+import type { AuthedContext } from "@/application/shared/context.ts"
+import { badRequest, notFound } from "@/application/shared/errors.ts"
 
 export interface PlaceOrderInput {
 	iphoneId: string

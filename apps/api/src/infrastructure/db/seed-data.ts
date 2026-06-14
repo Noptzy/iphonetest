@@ -1,4 +1,4 @@
-import type { IphoneInput } from "../../domain/iphone/iphone-repository.ts"
+import type { IphoneInput } from "@/domain/iphone/iphone-repository.ts"
 
 const MODEL_NUMBERS = [10, 11, 12, 13, 14, 15, 16, 17] as const
 const COLORS = ["Black", "White", "Blue", "Midnight", "Starlight"]

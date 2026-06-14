@@ -1,9 +1,9 @@
 import { ORPCError, os } from "@orpc/server"
-import { AppError } from "../../application/shared/errors.ts"
-import type { AuthedContext } from "../../application/shared/context.ts"
-import type { AppRole } from "../../domain/user/user.ts"
-import type { ORPCContext } from "./context.ts"
-import { mapAppErrorCode } from "./error-mapping.ts"
+import { AppError } from "@/application/shared/errors.ts"
+import type { AuthedContext } from "@/application/shared/context.ts"
+import type { AppRole } from "@/domain/user/user.ts"
+import type { ORPCContext } from "@/presentation/orpc/context.ts"
+import { mapAppErrorCode } from "@/presentation/orpc/error-mapping.ts"
 
 const base = os.$context<ORPCContext>()
 

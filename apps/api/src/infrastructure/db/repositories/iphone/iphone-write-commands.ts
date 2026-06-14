@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto"
 import { eq } from "drizzle-orm"
-import type { Iphone } from "../../../../domain/iphone/iphone.ts"
-import type { IphoneInput } from "../../../../domain/iphone/iphone-repository.ts"
-import type { Database } from "../../client.ts"
-import { iphone } from "../../schema.ts"
-import { mapRowToIphone } from "./iphone-row-mapper.ts"
+import type { Iphone } from "@/domain/iphone/iphone.ts"
+import type { IphoneInput } from "@/domain/iphone/iphone-repository.ts"
+import type { Database } from "@/infrastructure/db/client.ts"
+import { iphone } from "@/infrastructure/db/schema.ts"
+import { mapRowToIphone } from "@/infrastructure/db/repositories/iphone/iphone-row-mapper.ts"
 
 export function makeIphoneWriteCommands(db: Database) {
 	return {

@@ -1,6 +1,6 @@
-import type { IphoneInput, IphoneRepository } from "../../domain/iphone/iphone-repository.ts"
-import { notFound } from "../shared/errors.ts"
-import { assertConditionPercentageMatchesCondition } from "./iphone-condition-rule.ts"
+import type { IphoneInput, IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
+import { notFound } from "@/application/shared/errors.ts"
+import { assertConditionPercentageMatchesCondition } from "@/application/iphone/iphone-condition-rule.ts"
 
 export interface UpdateIphoneInput extends Partial<IphoneInput> {
 	id: string

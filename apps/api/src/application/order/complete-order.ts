@@ -1,7 +1,6 @@
-import type { OrderRepository } from "../../domain/order/order-repository.ts"
-import { badRequest, notFound } from "../shared/errors.ts"
+import type { OrderRepository } from "@/domain/order/order-repository.ts"
+import { badRequest, notFound } from "@/application/shared/errors.ts"
 
-/** Admin marks a confirmed order as delivered/closed. */
 export function makeCompleteOrder(orderRepo: OrderRepository) {
 	return async (input: { id: string }) => {
 		const order = await orderRepo.findById(input.id)

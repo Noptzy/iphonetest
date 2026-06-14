@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto"
 import { mkdir, writeFile } from "node:fs/promises"
 import { extname } from "node:path"
-import type { FileStorage } from "../../domain/ports/file-storage.ts"
+import type { FileStorage } from "@/domain/ports/file-storage.ts"
 
 /** Stores uploaded "bukti transfer" images on the local disk and serves them under /uploads. */
 export function createLocalFileStorage(uploadDir: string): FileStorage {
