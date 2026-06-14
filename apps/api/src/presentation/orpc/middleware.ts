@@ -1,13 +1,12 @@
+import type { AuthedContext } from "@api/application/shared/context.ts"
+import { AppError } from "@api/application/shared/errors.ts"
+import type { AppRole } from "@api/domain/user/user.ts"
+import type { ORPCContext } from "@api/presentation/orpc/context.ts"
+import { mapAppErrorCode } from "@api/presentation/orpc/error-mapping.ts"
 import { ORPCError, os } from "@orpc/server"
-import { AppError } from "@/application/shared/errors.ts"
-import type { AuthedContext } from "@/application/shared/context.ts"
-import type { AppRole } from "@/domain/user/user.ts"
-import type { ORPCContext } from "@/presentation/orpc/context.ts"
-import { mapAppErrorCode } from "@/presentation/orpc/error-mapping.ts"
 
 const base = os.$context<ORPCContext>()
 
-/** Translates a thrown AppError into the matching ORPCError; rethrows everything else. */
 const withErrorMapping = base.middleware(async ({ next }) => {
 	try {
 		return await next()
@@ -39,7 +38,6 @@ export function requireRole(...roles: AppRole[]) {
 
 export const adminProcedure = requireRole("admin")
 
-/** Narrows the nullable session to a guaranteed AuthedContext for use-case calls. */
 export function toAuthedContext(context: ORPCContext): AuthedContext {
 	if (!context.session) throw new ORPCError("UNAUTHORIZED", { message: "Authentication required" })
 	return { headers: context.headers, session: context.session }

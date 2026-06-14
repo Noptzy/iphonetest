@@ -16,6 +16,10 @@
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
-		"noEmit": true
+		"noEmit": true,
+		"paths": {
+			"@api/*": ["./apps/api/src/*"],
+			"@web/*": ["./apps/web/src/*"]
+		}
 	}
 }

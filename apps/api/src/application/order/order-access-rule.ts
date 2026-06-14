@@ -1,6 +1,6 @@
-import type { Order } from "@/domain/order/order.ts"
-import type { AuthedContext } from "@/application/shared/context.ts"
-import { forbidden } from "@/application/shared/errors.ts"
+import type { AuthedContext } from "@api/application/shared/context.ts"
+import { forbidden } from "@api/application/shared/errors.ts"
+import type { Order } from "@api/domain/order/order.ts"
 
 export function assertCanAccessOrder(order: Order, ctx: AuthedContext) {
 	const isAdmin = ctx.session.user.role === "admin"

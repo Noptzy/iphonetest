@@ -1,7 +1,9 @@
 import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
 export const user = pgTable("user", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	name: text("name").notNull(),
 	email: text("email").notNull().unique(),
 	emailVerified: boolean("email_verified").notNull().default(false),
@@ -12,7 +14,9 @@ export const user = pgTable("user", {
 })
 
 export const session = pgTable("session", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	token: text("token").notNull().unique(),
 	userId: text("user_id")
 		.notNull()
@@ -25,7 +29,9 @@ export const session = pgTable("session", {
 })
 
 export const account = pgTable("account", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	userId: text("user_id")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
@@ -43,7 +49,9 @@ export const account = pgTable("account", {
 })
 
 export const verification = pgTable("verification", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	identifier: text("identifier").notNull(),
 	value: text("value").notNull(),
 	expiresAt: timestamp("expires_at").notNull(),
@@ -52,12 +60,14 @@ export const verification = pgTable("verification", {
 })
 
 export const iphone = pgTable("iphone", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	model: text("model").notNull(),
 	storageGb: integer("storage_gb").notNull(),
 	color: text("color").notNull(),
-	condition: text("condition").notNull(), // "new" | "second"
-	conditionPercentage: integer("condition_percentage"), // null for "new"
+	condition: text("condition").notNull(),
+	conditionPercentage: integer("condition_percentage"),
 	priceIdr: integer("price_idr").notNull(),
 	stock: integer("stock").notNull().default(0),
 	description: text("description").notNull().default(""),
@@ -67,7 +77,9 @@ export const iphone = pgTable("iphone", {
 })
 
 export const order = pgTable("order", {
-	id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	userId: text("user_id")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),

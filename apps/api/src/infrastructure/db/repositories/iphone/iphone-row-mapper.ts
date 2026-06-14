@@ -1,5 +1,5 @@
-import type { Iphone, IphoneCondition } from "@/domain/iphone/iphone.ts"
-import type { iphone } from "@/infrastructure/db/schema.ts"
+import type { Iphone, IphoneCondition } from "@api/domain/iphone/iphone.ts"
+import type { iphone } from "@api/infrastructure/db/schema.ts"
 
 export type IphoneRow = typeof iphone.$inferSelect
 

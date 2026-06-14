@@ -1,7 +1,7 @@
-import type { UseCases } from "@/application/use-cases.ts"
-import { protectedProcedure, publicProcedure } from "@/presentation/orpc/middleware.ts"
-import { buildIphoneRouter } from "@/presentation/routers/iphone.ts"
-import { buildOrderRouter } from "@/presentation/routers/order.ts"
+import type { UseCases } from "@api/application/use-cases.ts"
+import { protectedProcedure, publicProcedure } from "@api/presentation/orpc/middleware.ts"
+import { buildIphoneRouter } from "@api/presentation/routers/iphone.ts"
+import { buildOrderRouter } from "@api/presentation/routers/order.ts"
 
 export function buildRouter(useCases: UseCases) {
 	return {

@@ -1,12 +1,10 @@
-import { Hono, type Context } from "hono"
-import type { AuthService } from "@/domain/ports/auth-service.ts"
-import type { FileStorage } from "@/domain/ports/file-storage.ts"
+import type { AuthService } from "@api/domain/ports/auth-service.ts"
+import type { FileStorage } from "@api/domain/ports/file-storage.ts"
+import { type Context, Hono } from "hono"
 
-/** Handles file uploads — payment receipts and product images. */
 export function buildUploadRoute(fileStorage: FileStorage, authService: AuthService) {
 	const upload = new Hono()
 
-	/** POST /payment-proof — authenticated buyers upload a transfer receipt. */
 	upload.post("/payment-proof", async (c) => {
 		const session = await authService.getSession(c.req.raw.headers)
 		if (!session) return c.json({ error: "Authentication required" }, 401)
@@ -14,7 +12,6 @@ export function buildUploadRoute(fileStorage: FileStorage, authService: AuthServ
 		return await handleFileUpload(c, fileStorage)
 	})
 
-	/** POST /product-image — admin-only upload for iPhone product images. */
 	upload.post("/product-image", async (c) => {
 		const session = await authService.getSession(c.req.raw.headers)
 		if (!session) return c.json({ error: "Authentication required" }, 401)

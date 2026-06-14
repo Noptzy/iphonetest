@@ -1,5 +1,5 @@
-import { createRouter } from "@tanstack/react-router"
 import type { QueryClient } from "@tanstack/react-query"
+import { createRouter } from "@tanstack/react-router"
 import type { CurrentUser } from "./libs/auth/use-session.ts"
 import { routeTree } from "./routeTree.gen.ts"
 

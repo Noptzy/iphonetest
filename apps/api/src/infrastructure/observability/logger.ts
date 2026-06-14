@@ -1,5 +1,5 @@
+import { env } from "@api/infrastructure/config/env.ts"
 import { pino } from "pino"
-import { env } from "@/infrastructure/config/env.ts"
 
 export const logger = pino({
 	level: env.NODE_ENV === "production" ? "info" : "debug",

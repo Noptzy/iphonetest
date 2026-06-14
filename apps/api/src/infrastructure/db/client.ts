@@ -1,6 +1,6 @@
+import * as schema from "@api/infrastructure/db/schema.ts"
 import { drizzle } from "drizzle-orm/node-postgres"
 import { Pool } from "pg"
-import * as schema from "@/infrastructure/db/schema.ts"
 
 export type Database = ReturnType<typeof createDb>
 

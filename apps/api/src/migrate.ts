@@ -1,7 +1,7 @@
+import { env } from "@api/infrastructure/config/env.ts"
+import { createDb } from "@api/infrastructure/db/client.ts"
+import { logger } from "@api/infrastructure/observability/logger.ts"
 import { migrate } from "drizzle-orm/node-postgres/migrator"
-import { createDb } from "@/infrastructure/db/client.ts"
-import { env } from "@/infrastructure/config/env.ts"
-import { logger } from "@/infrastructure/observability/logger.ts"
 
 async function runMigrations() {
 	const db = createDb(env.DATABASE_URL)

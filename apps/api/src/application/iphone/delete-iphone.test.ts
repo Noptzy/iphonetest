@@ -1,11 +1,11 @@
-import { describe, it, expect, vi } from "vitest"
-import { makeDeleteIphone } from "@/application/iphone/delete-iphone.ts"
+import { makeDeleteIphone } from "@api/application/iphone/delete-iphone.ts"
+import { describe, expect, it, vi } from "vitest"
 
 describe("makeDeleteIphone", () => {
 	it("should successfully delete an iphone", async () => {
 		const mockRepo = {
 			delete: vi.fn().mockResolvedValue(true),
-		} as any
+		} as unknown as Parameters<typeof makeDeleteIphone>[0]
 
 		const deleteIphone = makeDeleteIphone(mockRepo)
 		const result = await deleteIphone({ id: "iphone-1" })
@@ -17,7 +17,7 @@ describe("makeDeleteIphone", () => {
 	it("should fail if iphone not found", async () => {
 		const mockRepo = {
 			delete: vi.fn().mockResolvedValue(false),
-		} as any
+		} as unknown as Parameters<typeof makeDeleteIphone>[0]
 
 		const deleteIphone = makeDeleteIphone(mockRepo)
 		await expect(deleteIphone({ id: "iphone-1" })).rejects.toThrow(/iPhone not found/)

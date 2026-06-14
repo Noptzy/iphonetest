@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
 import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router"
-import { ConditionBadge } from "@/components/ui/condition-badge.tsx"
-import { formatIdr } from "@/libs/format/idr.ts"
-import { orpc } from "@/libs/orpc/client.ts"
+import { ConditionBadge } from "@web/components/condition-badge.tsx"
+import { useIphoneDetail } from "@web/features/iphones/queries/use-iphone-detail.ts"
+import { useCreateOrder } from "@web/features/orders/mutations/use-create-order.ts"
+import { formatIdr } from "@web/libs/format/idr.ts"
 
 export const Route = createFileRoute("/iphone/$id")({
 	component: IphoneDetailPage,
@@ -12,13 +12,11 @@ function IphoneDetailPage() {
 	const { id } = Route.useParams()
 	const navigate = useNavigate()
 	const user = useRouter().options.context.user
-	const { data: iphone, isLoading } = useQuery(orpc.iphone.get.queryOptions({ input: { id } }))
+	const { data: iphone, isLoading } = useIphoneDetail(id)
 
-	const placeOrder = useMutation(
-		orpc.order.place.mutationOptions({
-			onSuccess: (order) => navigate({ to: "/orders/$id", params: { id: order.id } }),
-		}),
-	)
+	const placeOrder = useCreateOrder((data) => {
+		navigate({ to: "/orders/$id", params: { id: data.id } })
+	})
 
 	if (isLoading) return <p className="text-slate-500">Loading…</p>
 	if (!iphone) return <p className="text-slate-500">iPhone not found.</p>
@@ -27,7 +25,11 @@ function IphoneDetailPage() {
 		<div className="flex flex-col md:flex-row gap-12 max-w-5xl mx-auto py-8 items-start">
 			<div className="w-full md:w-1/2 flex justify-center bg-white rounded-3xl p-8 shadow-sm">
 				{iphone.imageUrl ? (
-					<img src={iphone.imageUrl} alt={iphone.model} className="w-full max-w-sm object-contain" />
+					<img
+						src={iphone.imageUrl}
+						alt={iphone.model}
+						className="w-full max-w-sm object-contain"
+					/>
 				) : (
 					<div className="w-full aspect-square bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300">
 						No Image
@@ -42,14 +44,17 @@ function IphoneDetailPage() {
 					<p className="text-lg text-slate-500 font-medium">
 						{iphone.storageGb}GB · {iphone.color}
 					</p>
-					<ConditionBadge condition={iphone.condition} conditionPercentage={iphone.conditionPercentage} />
+					<ConditionBadge
+						condition={iphone.condition}
+						conditionPercentage={iphone.conditionPercentage}
+					/>
 				</div>
-				
+
 				<p className="text-3xl font-semibold mb-2">{formatIdr(iphone.priceIdr)}</p>
 				<p className="text-sm text-slate-400 mb-8">
 					{iphone.stock > 0 ? `${iphone.stock} in stock` : "Out of stock"}
 				</p>
-				
+
 				<div className="prose prose-slate mb-10 text-[#1d1d1f] leading-relaxed whitespace-pre-line">
 					{iphone.description}
 				</div>
@@ -57,10 +62,12 @@ function IphoneDetailPage() {
 				<div className="mt-auto border-t border-slate-200 pt-8">
 					{user?.role === "admin" ? (
 						<div className="rounded-2xl bg-slate-100 p-6 text-center">
-							<p className="text-sm text-slate-600 mb-3">
-								Admins cannot purchase items.
-							</p>
-							<button onClick={() => navigate({ to: "/admin/iphones" })} className="rounded-full bg-black px-6 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors">
+							<p className="text-sm text-slate-600 mb-3">Admins cannot purchase items.</p>
+							<button
+								type="button"
+								onClick={() => navigate({ to: "/admin/iphones" })}
+								className="rounded-full bg-black px-6 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors"
+							>
 								Go to Dashboard
 							</button>
 						</div>
@@ -75,10 +82,12 @@ function IphoneDetailPage() {
 						</button>
 					) : (
 						<div className="rounded-2xl bg-slate-100 p-6 text-center">
-							<p className="text-sm text-slate-600 mb-3">
-								Please sign in to buy this iPhone.
-							</p>
-							<button onClick={() => navigate({ to: "/login" })} className="rounded-full bg-black px-6 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors">
+							<p className="text-sm text-slate-600 mb-3">Please sign in to buy this iPhone.</p>
+							<button
+								type="button"
+								onClick={() => navigate({ to: "/login" })}
+								className="rounded-full bg-black px-6 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors"
+							>
 								Sign in
 							</button>
 						</div>

@@ -1,17 +1,18 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignore": [
-			"**/dist/**",
-			"**/node_modules/**",
-			"**/drizzle/**",
-			"**/routeTree.gen.ts",
-			"**/uploads/**"
+		"includes": [
+			"**",
+			"!**/dist/**",
+			"!**/node_modules/**",
+			"!**/drizzle/**",
+			"!**/routeTree.gen.ts",
+			"!**/uploads/**"
 		]
 	},
 	"formatter": {
@@ -28,15 +29,18 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
+			"correctness": {
+				"noChildrenProp": "off"
+			},
 			"a11y": {
-				"useArrayIndexKey": "off"
+				"noLabelWithoutControl": "off"
 			}
 		}
 	},
 	"overrides": [
 		{
-			"include": ["**/main.ts", "**/better-auth.ts", "**/seed.ts", "**/polyfill.ts"],
+			"includes": ["**/main.ts", "**/better-auth.ts", "**/seed.ts", "**/polyfill.ts"],
 			"linter": {
 				"rules": {
 					"style": { "noNonNullAssertion": "off" },
@@ -45,10 +49,10 @@
 			}
 		},
 		{
-			"include": ["**/components/ui/**"],
+			"includes": ["**/components/ui/**"],
 			"linter": {
 				"rules": {
-					"style": { "noDocumentCookie": "off" },
+					"style": {},
 					"security": { "noDangerouslySetInnerHtml": "off" }
 				}
 			}

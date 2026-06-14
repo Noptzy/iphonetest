@@ -1,5 +1,5 @@
-import type { IphoneInput, IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
-import { assertConditionPercentageMatchesCondition } from "@/application/iphone/iphone-condition-rule.ts"
+import { assertConditionPercentageMatchesCondition } from "@api/application/iphone/iphone-condition-rule.ts"
+import type { IphoneInput, IphoneRepository } from "@api/domain/iphone/iphone-repository.ts"
 
 export function makeCreateIphone(iphoneRepo: IphoneRepository) {
 	return (input: IphoneInput) => {

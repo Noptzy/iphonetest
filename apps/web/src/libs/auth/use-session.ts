@@ -8,7 +8,6 @@ export interface CurrentUser {
 	role: AppRole
 }
 
-/** Fetches the active session user (or null) outside React, for router beforeLoad guards. */
 export async function fetchCurrentUser(): Promise<CurrentUser | null> {
 	const { data } = await authClient.getSession()
 	if (!data) return null

@@ -1,4 +1,4 @@
-import type { Order, OrderStatus } from "@/domain/order/order.ts"
+import type { Order, OrderStatus } from "@api/domain/order/order.ts"
 
 export interface CreateOrderInput {
 	userId: string

@@ -1,5 +1,5 @@
-import type { IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
-import { notFound } from "@/application/shared/errors.ts"
+import { notFound } from "@api/application/shared/errors.ts"
+import type { IphoneRepository } from "@api/domain/iphone/iphone-repository.ts"
 
 export function makeDeleteIphone(iphoneRepo: IphoneRepository) {
 	return async (input: { id: string }) => {

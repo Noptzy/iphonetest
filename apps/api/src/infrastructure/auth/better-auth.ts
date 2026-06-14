@@ -1,8 +1,8 @@
+import { env } from "@api/infrastructure/config/env.ts"
+import type { Database } from "@api/infrastructure/db/client.ts"
+import * as schema from "@api/infrastructure/db/schema.ts"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import type { Database } from "@/infrastructure/db/client.ts"
-import * as schema from "@/infrastructure/db/schema.ts"
-import { env } from "@/infrastructure/config/env.ts"
 
 export type Auth = ReturnType<typeof buildAuth>
 

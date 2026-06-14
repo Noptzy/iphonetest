@@ -1,5 +1,5 @@
-import type { IphoneCondition } from "@/domain/iphone/iphone.ts"
-import { badRequest } from "@/application/shared/errors.ts"
+import { badRequest } from "@api/application/shared/errors.ts"
+import type { IphoneCondition } from "@api/domain/iphone/iphone.ts"
 
 export function assertConditionPercentageMatchesCondition(
 	condition: IphoneCondition,

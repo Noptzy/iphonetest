@@ -6,7 +6,6 @@ export interface Iphone {
 	storageGb: number
 	color: string
 	condition: IphoneCondition
-	/** Only set when condition is "second", a value from 1-100 representing physical/battery health. */
 	conditionPercentage: number | null
 	priceIdr: number
 	stock: number

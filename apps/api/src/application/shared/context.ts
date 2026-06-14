@@ -1,4 +1,4 @@
-import type { Session } from "@/domain/ports/auth-service.ts"
+import type { Session } from "@api/domain/ports/auth-service.ts"
 
 export interface AuthedContext {
 	headers: Headers

@@ -1,7 +1,7 @@
+import type { AppRouter } from "@api/presentation/routers/index.ts"
 import type { RouterClient } from "@orpc/server"
-import type { AppRouter } from "@/presentation/routers/index.ts"
 
+export type { Session } from "@api/domain/ports/auth-service.ts"
+export type { AppRole } from "@api/domain/user/user.ts"
 export type { AppRouter }
-export type { Session } from "@/domain/ports/auth-service.ts"
-export type { AppRole } from "@/domain/user/user.ts"
 export type AppRouterClient = RouterClient<AppRouter>

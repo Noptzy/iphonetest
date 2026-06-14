@@ -1,7 +1,7 @@
-import type { OrderRepository } from "@/domain/order/order-repository.ts"
-import type { AuthedContext } from "@/application/shared/context.ts"
-import { badRequest, notFound } from "@/application/shared/errors.ts"
-import { assertCanAccessOrder } from "@/application/order/order-access-rule.ts"
+import { assertCanAccessOrder } from "@api/application/order/order-access-rule.ts"
+import type { AuthedContext } from "@api/application/shared/context.ts"
+import { badRequest, notFound } from "@api/application/shared/errors.ts"
+import type { OrderRepository } from "@api/domain/order/order-repository.ts"
 
 export interface UploadPaymentProofInput {
 	orderId: string

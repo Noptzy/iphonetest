@@ -1,15 +1,20 @@
-import { describe, it, expect, vi } from "vitest"
-import { makeConfirmOrder } from "@/application/order/confirm-order.ts"
+import { makeConfirmOrder } from "@api/application/order/confirm-order.ts"
+import { describe, expect, it, vi } from "vitest"
 
 describe("makeConfirmOrder", () => {
 	it("should confirm order and deduct stock", async () => {
 		const mockOrderRepo = {
-			findById: vi.fn().mockResolvedValue({ id: "order-1", iphoneId: "iphone-1", quantity: 2, status: "payment_review" }),
+			findById: vi.fn().mockResolvedValue({
+				id: "order-1",
+				iphoneId: "iphone-1",
+				quantity: 2,
+				status: "payment_review",
+			}),
 			updateStatus: vi.fn().mockResolvedValue({ id: "order-1", status: "confirmed" }),
-		} as any
+		} as unknown as Parameters<typeof makeConfirmOrder>[0]["orderRepo"]
 		const mockIphoneRepo = {
 			decreaseStock: vi.fn().mockResolvedValue(true),
-		} as any
+		} as unknown as Parameters<typeof makeConfirmOrder>[0]["iphoneRepo"]
 
 		const confirmOrder = makeConfirmOrder({ iphoneRepo: mockIphoneRepo, orderRepo: mockOrderRepo })
 
@@ -21,24 +26,37 @@ describe("makeConfirmOrder", () => {
 	})
 
 	it("should fail if order not found", async () => {
-		const mockOrderRepo = { findById: vi.fn().mockResolvedValue(null) } as any
-		const confirmOrder = makeConfirmOrder({ iphoneRepo: {} as any, orderRepo: mockOrderRepo })
+		const mockOrderRepo = { findById: vi.fn().mockResolvedValue(null) } as unknown as Parameters<typeof makeConfirmOrder>[0]["orderRepo"]
+		const confirmOrder = makeConfirmOrder({ iphoneRepo: {} as unknown as Parameters<typeof makeConfirmOrder>[0]["iphoneRepo"], orderRepo: mockOrderRepo })
 
 		await expect(confirmOrder({ id: "order-1" })).rejects.toThrow(/Order not found/)
 	})
 
 	it("should fail if order is not under payment review", async () => {
-		const mockOrderRepo = { findById: vi.fn().mockResolvedValue({ id: "order-1", status: "pending_payment" }) } as any
-		const confirmOrder = makeConfirmOrder({ iphoneRepo: {} as any, orderRepo: mockOrderRepo })
+		const mockOrderRepo = {
+			findById: vi.fn().mockResolvedValue({ id: "order-1", status: "pending_payment" }),
+		} as unknown as Parameters<typeof makeConfirmOrder>[0]["orderRepo"]
+		const confirmOrder = makeConfirmOrder({ iphoneRepo: {} as unknown as Parameters<typeof makeConfirmOrder>[0]["iphoneRepo"], orderRepo: mockOrderRepo })
 
-		await expect(confirmOrder({ id: "order-1" })).rejects.toThrow(/Only orders under payment review can be confirmed/)
+		await expect(confirmOrder({ id: "order-1" })).rejects.toThrow(
+			/Only orders under payment review can be confirmed/,
+		)
 	})
 
 	it("should fail if not enough stock during confirmation", async () => {
-		const mockOrderRepo = { findById: vi.fn().mockResolvedValue({ id: "order-1", status: "payment_review", iphoneId: "iphone-1", quantity: 2 }) } as any
-		const mockIphoneRepo = { decreaseStock: vi.fn().mockResolvedValue(false) } as any
+		const mockOrderRepo = {
+			findById: vi.fn().mockResolvedValue({
+				id: "order-1",
+				status: "payment_review",
+				iphoneId: "iphone-1",
+				quantity: 2,
+			}),
+		} as unknown as Parameters<typeof makeConfirmOrder>[0]["orderRepo"]
+		const mockIphoneRepo = { decreaseStock: vi.fn().mockResolvedValue(false) } as unknown as Parameters<typeof makeConfirmOrder>[0]["iphoneRepo"]
 		const confirmOrder = makeConfirmOrder({ iphoneRepo: mockIphoneRepo, orderRepo: mockOrderRepo })
 
-		await expect(confirmOrder({ id: "order-1" })).rejects.toThrow(/Not enough stock to fulfil this order/)
+		await expect(confirmOrder({ id: "order-1" })).rejects.toThrow(
+			/Not enough stock to fulfil this order/,
+		)
 	})
 })

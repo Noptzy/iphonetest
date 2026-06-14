@@ -1,6 +1,6 @@
-import type { IphoneRepository } from "@/domain/iphone/iphone-repository.ts"
-import type { OrderRepository } from "@/domain/order/order-repository.ts"
-import { badRequest, conflict, notFound } from "@/application/shared/errors.ts"
+import { badRequest, conflict, notFound } from "@api/application/shared/errors.ts"
+import type { IphoneRepository } from "@api/domain/iphone/iphone-repository.ts"
+import type { OrderRepository } from "@api/domain/order/order-repository.ts"
 
 export interface ConfirmOrderDeps {
 	iphoneRepo: IphoneRepository

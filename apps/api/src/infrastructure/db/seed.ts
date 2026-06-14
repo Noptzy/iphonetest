@@ -1,11 +1,11 @@
+import { buildAuth } from "@api/infrastructure/auth/better-auth.ts"
+import { env } from "@api/infrastructure/config/env.ts"
+import { createDb } from "@api/infrastructure/db/client.ts"
+import { createIphoneRepository } from "@api/infrastructure/db/repositories/iphone/iphone-repository.ts"
+import { user } from "@api/infrastructure/db/schema.ts"
+import { buildIphoneCatalog } from "@api/infrastructure/db/seed-data.ts"
+import { logger } from "@api/infrastructure/observability/logger.ts"
 import { eq } from "drizzle-orm"
-import { buildAuth } from "@/infrastructure/auth/better-auth.ts"
-import { env } from "@/infrastructure/config/env.ts"
-import { logger } from "@/infrastructure/observability/logger.ts"
-import { createDb } from "@/infrastructure/db/client.ts"
-import { createIphoneRepository } from "@/infrastructure/db/repositories/iphone/iphone-repository.ts"
-import { buildIphoneCatalog } from "@/infrastructure/db/seed-data.ts"
-import { user } from "@/infrastructure/db/schema.ts"
 
 const db = createDb(env.DATABASE_URL)
 const auth = buildAuth(db)
@@ -23,7 +23,6 @@ const ACCOUNTS: SeedAccount[] = [
 	{ name: "Buyer", email: "user@iphone.test", password: "user12345", role: "user" },
 ]
 
-/** Creates the account if missing, then forces its role. Safe to re-run. */
 async function ensureAccount(account: SeedAccount) {
 	const [existing] = await db.select().from(user).where(eq(user.email, account.email)).limit(1)
 	if (!existing) {
@@ -35,7 +34,6 @@ async function ensureAccount(account: SeedAccount) {
 	logger.info(`Account ready: ${account.email} (${account.role})`)
 }
 
-/** Inserts the catalog only when the table is empty, so re-running does not duplicate rows. */
 async function ensureCatalog() {
 	const existing = await iphoneRepo.listAll()
 	if (existing.length > 0) {

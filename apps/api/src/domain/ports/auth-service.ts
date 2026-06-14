@@ -1,4 +1,4 @@
-import type { AppRole, User } from "@/domain/user/user.ts"
+import type { AppRole, User } from "@api/domain/user/user.ts"
 
 export interface SessionUser {
 	id: string
@@ -12,8 +12,6 @@ export interface Session {
 }
 
 export interface AuthService {
-	/** Resolve the current session from request headers, or null if unauthenticated. */
 	getSession(headers: Headers): Promise<Session | null>
-	/** Create a user directly (used by the seed script). Returns the created user. */
 	createUser(input: { name: string; email: string; password: string; role: AppRole }): Promise<User>
 }

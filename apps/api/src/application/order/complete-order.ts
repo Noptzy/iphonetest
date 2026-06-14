@@ -1,5 +1,5 @@
-import type { OrderRepository } from "@/domain/order/order-repository.ts"
-import { badRequest, notFound } from "@/application/shared/errors.ts"
+import { badRequest, notFound } from "@api/application/shared/errors.ts"
+import type { OrderRepository } from "@api/domain/order/order-repository.ts"
 
 export function makeCompleteOrder(orderRepo: OrderRepository) {
 	return async (input: { id: string }) => {

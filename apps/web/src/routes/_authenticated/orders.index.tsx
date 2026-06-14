@@ -1,15 +1,14 @@
-import { useQuery } from "@tanstack/react-query"
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { OrderStatusBadge } from "@/components/ui/order-status-badge.tsx"
-import { formatIdr } from "@/libs/format/idr.ts"
-import { orpc } from "@/libs/orpc/client.ts"
+import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
+import { useMyOrders } from "@web/features/orders/queries/use-my-orders.ts"
+import { formatIdr } from "@web/libs/format/idr.ts"
 
 export const Route = createFileRoute("/_authenticated/orders/")({
 	component: MyOrdersPage,
 })
 
 function MyOrdersPage() {
-	const { data: orders, isLoading } = useQuery(orpc.order.listMine.queryOptions())
+	const { data: orders, isLoading } = useMyOrders()
 
 	if (isLoading) return <p className="text-slate-500">Loading orders…</p>
 	if (!orders?.length) return <p className="text-slate-500">You have no orders yet.</p>
@@ -26,14 +25,18 @@ function MyOrdersPage() {
 						className="group flex items-center justify-between rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:scale-[1.01]"
 					>
 						<div>
-							<p className="text-xl font-medium tracking-tight mb-1">Order #{order.id.slice(0, 8).toUpperCase()}</p>
+							<p className="text-xl font-medium tracking-tight mb-1">
+								Order #{order.id.slice(0, 8).toUpperCase()}
+							</p>
 							<p className="text-slate-500">
 								{order.quantity} item(s) · {formatIdr(order.totalPriceIdr)}
 							</p>
 						</div>
 						<div className="flex items-center gap-6">
 							<OrderStatusBadge status={order.status} />
-							<span className="text-[#0071e3] font-medium group-hover:underline hidden sm:block">View Details</span>
+							<span className="text-[#0071e3] font-medium group-hover:underline hidden sm:block">
+								View Details
+							</span>
 						</div>
 					</Link>
 				))}

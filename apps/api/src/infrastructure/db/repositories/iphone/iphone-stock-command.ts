@@ -1,10 +1,9 @@
+import type { Database } from "@api/infrastructure/db/client.ts"
+import { iphone } from "@api/infrastructure/db/schema.ts"
 import { sql } from "drizzle-orm"
-import type { Database } from "@/infrastructure/db/client.ts"
-import { iphone } from "@/infrastructure/db/schema.ts"
 
 export function makeIphoneStockCommand(db: Database) {
 	return {
-		/** Atomically subtracts stock only when enough is available. Returns false if not. */
 		async decreaseStock(id: string, quantity: number): Promise<boolean> {
 			const result = await db
 				.update(iphone)

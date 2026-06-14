@@ -1,4 +1,4 @@
-import type { Iphone, IphoneCondition } from "@/domain/iphone/iphone.ts"
+import type { Iphone, IphoneCondition } from "@api/domain/iphone/iphone.ts"
 
 export interface IphoneInput {
 	model: string
