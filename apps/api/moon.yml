@@ -1,0 +1,39 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+project:
+  type: "application"
+language: "typescript"
+
+tasks:
+  dev:
+    command: "tsx watch src/main.ts"
+
+    options:
+      runInCI: false
+
+  build:
+    command: "tsc -p tsconfig.json"
+    inputs:
+      - "src/**/*"
+      - "tsconfig.json"
+
+  test:
+    command: "vitest run"
+    inputs:
+      - "src/**/*"
+
+  db-push:
+    command: "drizzle-kit push"
+
+
+  db-generate:
+    command: "drizzle-kit generate"
+
+
+  db-migrate:
+    command: "tsx src/migrate.ts"
+
+
+  db-seed:
+    command: "tsx src/infrastructure/db/seed.ts"
+

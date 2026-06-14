@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.moon/cache/
+apps/web/src/routeTree.gen.ts
+apps/api/uploads/*
+!apps/api/uploads/.gitkeep

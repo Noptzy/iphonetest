@@ -1,0 +1,27 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+project:
+  type: "application"
+language: "typescript"
+
+dependsOn:
+  - "api"
+
+tasks:
+  dev:
+    command: "vite"
+
+    options:
+      runInCI: false
+
+  build:
+    command: "vite build"
+    inputs:
+      - "src/**/*"
+      - "vite.config.ts"
+      - "index.html"
+
+  test:
+    command: "vitest run"
+    inputs:
+      - "src/**/*"

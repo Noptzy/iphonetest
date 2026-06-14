@@ -1,0 +1,17 @@
+$schema: "https://moonrepo.dev/schemas/tasks.json"
+
+tasks:
+  lint:
+    command: "biome lint ."
+    inputs:
+      - "**/*.{ts,tsx,js,jsx,json}"
+
+  format:
+    command: "biome format --write ."
+    inputs:
+      - "**/*.{ts,tsx,js,jsx,json}"
+
+  check:
+    command: "biome check ."
+    inputs:
+      - "**/*.{ts,tsx,js,jsx,json}"

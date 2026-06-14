@@ -1,0 +1,21 @@
+{
+	"name": "iphone-marketplace",
+	"private": true,
+	"version": "0.1.0",
+	"engines": {
+		"node": ">=22"
+	},
+	"packageManager": "pnpm@10.33.0",
+	"scripts": {
+		"dev": "moon run :dev",
+		"build": "moon run :build",
+		"check": "moon run :check",
+		"lint": "moon run :lint",
+		"format": "moon run :format",
+		"test": "moon run :test",
+		"db:push": "moon run api:db-push",
+		"db:generate": "moon run api:db-generate",
+		"db:migrate": "moon run api:db-migrate",
+		"db:seed": "moon run api:db-seed"
+	}
+}

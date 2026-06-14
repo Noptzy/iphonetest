@@ -1,0 +1,14 @@
+node_modules
+apps/*/node_modules
+dist
+apps/*/dist
+.env
+.env.example
+.moon/cache
+coverage
+.git
+.gitignore
+*.md
+biome.json
+docker-compose.dev.yml
+node_modules/.cache
