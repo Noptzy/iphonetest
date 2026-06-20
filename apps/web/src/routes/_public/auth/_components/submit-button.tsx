@@ -1,7 +1,11 @@
-import { useForm } from "@tanstack/react-form"
+import { type ReactFormExtendedApi } from "@tanstack/react-form"
+
+// biome-ignore lint/suspicious/noExplicitAny: TanStack Form's typed API requires 12 generic params per form. This shared component must accept any form variant.
+// biome-ignore lint/complexity/noBannedTypes: see above
+type AnyFormApi = ReactFormExtendedApi<any, any, any, any, any, any, any, any, any, any, any, any>
 
 type SubmitButtonProps = {
-	form: ReturnType<typeof useForm>
+	form: AnyFormApi
 	label: string
 	pendingLabel: string
 }
