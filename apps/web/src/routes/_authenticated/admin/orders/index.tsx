@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
-import { useAdminOrders } from "@web/features/orders/queries/use-admin-orders.ts"
+import { OrderStatusBadge } from "@web/routes/_authenticated/_components/order-status-badge.tsx"
+import { useAdminOrders } from "@web/routes/_authenticated/admin/orders/_hooks/use-admin-orders.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
 export const Route = createFileRoute("/_authenticated/admin/orders/")({
