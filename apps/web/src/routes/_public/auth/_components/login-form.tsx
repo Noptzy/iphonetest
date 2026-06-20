@@ -1,7 +1,7 @@
 import { useForm } from "@tanstack/react-form"
 import { Link } from "@tanstack/react-router"
-import { useLogin } from "@web/features/auth/mutations/use-login.ts"
-import { loginSchema } from "@web/features/auth/schemas/auth.schema.ts"
+import { useLogin } from "@web/routes/_public/auth/_hooks/use-login.ts"
+import { loginSchema } from "@web/routes/_public/auth/_apis/auth-schema.ts"
 
 export function LoginForm() {
 	const login = useLogin()

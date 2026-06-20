@@ -1,5 +1,5 @@
 import { type UseMutationResult, useMutation } from "@tanstack/react-query"
-import type { LoginFormValues } from "@web/features/auth/schemas/auth.schema.ts"
+import type { LoginFormValues } from "@web/routes/_public/auth/_apis/auth-schema.ts"
 import { authClient } from "@web/libs/auth/client.ts"
 
 export function useLogin(): UseMutationResult<
