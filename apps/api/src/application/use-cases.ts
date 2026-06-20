@@ -12,22 +12,24 @@ import { makeListMyOrders } from "@api/application/order/list-my-orders.ts"
 import { makePlaceOrder } from "@api/application/order/place-order.ts"
 import { makeRejectOrder } from "@api/application/order/reject-order.ts"
 import { makeUploadPaymentProof } from "@api/application/order/upload-payment-proof.ts"
+import type { Cache } from "@api/domain/ports/cache.ts"
 import type { IphoneRepository } from "@api/domain/iphone/iphone-repository.ts"
 import type { OrderRepository } from "@api/domain/order/order-repository.ts"
 
 export interface Dependencies {
 	iphoneRepo: IphoneRepository
 	orderRepo: OrderRepository
+	cache: Cache
 }
 
 export function buildUseCases(deps: Dependencies) {
 	return {
 		iphone: {
-			list: makeListIphones(deps.iphoneRepo),
+			list: makeListIphones(deps.iphoneRepo, deps.cache),
 			get: makeGetIphone(deps.iphoneRepo),
-			create: makeCreateIphone(deps.iphoneRepo),
-			update: makeUpdateIphone(deps.iphoneRepo),
-			delete: makeDeleteIphone(deps.iphoneRepo),
+			create: makeCreateIphone(deps.iphoneRepo, deps.cache),
+			update: makeUpdateIphone(deps.iphoneRepo, deps.cache),
+			delete: makeDeleteIphone(deps.iphoneRepo, deps.cache),
 		},
 		order: {
 			place: makePlaceOrder(deps),

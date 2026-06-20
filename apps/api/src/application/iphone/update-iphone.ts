@@ -1,12 +1,14 @@
 import { assertConditionPercentageMatchesCondition } from "@api/application/iphone/iphone-condition-rule.ts"
+import { IPHONE_LIST_CACHE_KEY } from "@api/application/iphone/list-iphones.ts"
 import { notFound } from "@api/application/shared/errors.ts"
 import type { IphoneInput, IphoneRepository } from "@api/domain/iphone/iphone-repository.ts"
+import type { Cache } from "@api/domain/ports/cache.ts"
 
 export interface UpdateIphoneInput extends Partial<IphoneInput> {
 	id: string
 }
 
-export function makeUpdateIphone(iphoneRepo: IphoneRepository) {
+export function makeUpdateIphone(iphoneRepo: IphoneRepository, cache: Cache) {
 	return async (input: UpdateIphoneInput) => {
 		const { id, ...changes } = input
 		const existing = await iphoneRepo.findById(id)
@@ -21,6 +23,7 @@ export function makeUpdateIphone(iphoneRepo: IphoneRepository) {
 
 		const updated = await iphoneRepo.update(id, changes)
 		if (!updated) throw notFound("iPhone not found")
+		await cache.del(IPHONE_LIST_CACHE_KEY)
 		return updated
 	}
 }
