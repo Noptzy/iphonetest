@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router"
-import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
-import { useMyOrders } from "@web/features/orders/queries/use-my-orders.ts"
+import { OrderStatusBadge } from "@web/routes/_authenticated/_components/order-status-badge.tsx"
+import { useMyOrders } from "@web/routes/_authenticated/orders/_hooks/use-my-orders.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
 export function MyOrders() {

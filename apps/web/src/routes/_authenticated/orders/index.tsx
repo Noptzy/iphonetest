@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { MyOrders } from "@web/features/orders/components/MyOrders.tsx"
+import { MyOrders } from "@web/routes/_authenticated/orders/_components/my-orders.tsx"
 
 export const Route = createFileRoute("/_authenticated/orders/")({
 	component: MyOrdersPage,

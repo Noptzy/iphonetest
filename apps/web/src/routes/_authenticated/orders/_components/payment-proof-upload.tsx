@@ -1,6 +1,6 @@
 import { useForm } from "@tanstack/react-form"
-import { Button } from "@web/components/button.tsx"
-import { useUploadPaymentProof } from "@web/features/uploads/mutations/use-upload-payment-proof.ts"
+import { Button } from "@web/components/ui/button.tsx"
+import { useUploadPaymentProof } from "@web/routes/_authenticated/orders/_hooks/use-upload-payment-proof.ts"
 
 export function PaymentProofUpload({
 	orderId,

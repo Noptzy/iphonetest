@@ -1,9 +1,9 @@
 import { useRouter } from "@tanstack/react-router"
-import { Card } from "@web/components/card.tsx"
-import { OrderStatusBadge } from "@web/components/order-status-badge.tsx"
-import { AdminOrderActions } from "@web/features/orders/components/AdminOrderActions.tsx"
-import { PaymentProofUpload } from "@web/features/orders/components/PaymentProofUpload.tsx"
-import { useOrderDetail } from "@web/features/orders/queries/use-order-detail.ts"
+import { Card } from "@web/components/ui/card.tsx"
+import { OrderStatusBadge } from "@web/routes/_authenticated/_components/order-status-badge.tsx"
+import { AdminOrderActions } from "@web/routes/_authenticated/admin/orders/_components/admin-order-actions.tsx"
+import { PaymentProofUpload } from "@web/routes/_authenticated/orders/_components/payment-proof-upload.tsx"
+import { useOrderDetail } from "@web/routes/_authenticated/orders/_hooks/use-order-detail.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
 const bankAccount = {
