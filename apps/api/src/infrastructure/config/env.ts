@@ -13,6 +13,7 @@ const envSchema = z.object({
 	PORT: z.coerce.number().int().positive().default(3001),
 	NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 	UPLOAD_DIR: z.string().min(1).default("./uploads"),
+	REDIS_URL: z.string().min(1).default("redis://127.0.0.1:6379"),
 })
 
 function loadEnv() {

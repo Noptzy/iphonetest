@@ -1,21 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import { OrderStatusBadge } from "@web/routes/_authenticated/_components/order-status-badge.tsx"
-import { useAdminOrders } from "@web/routes/_authenticated/admin/orders/_hooks/use-admin-orders.ts"
+import { useMyOrders } from "@web/routes/_authenticated/orders/_hooks/use-my-orders.ts"
 import { formatIdr } from "@web/libs/format/idr.ts"
 
-export const Route = createFileRoute("/_authenticated/admin/orders/")({
-	component: AdminOrdersPage,
-})
-
-function AdminOrdersPage() {
-	const { data: orders, isLoading } = useAdminOrders()
+export function MyOrders() {
+	const { data: orders, isLoading } = useMyOrders()
 
 	if (isLoading) return <p className="text-slate-500">Loading orders…</p>
-	if (!orders?.length) return <p className="text-slate-500">No orders yet.</p>
+	if (!orders?.length) return <p className="text-slate-500">You have no orders yet.</p>
 
 	return (
-		<div className="max-w-5xl mx-auto py-8">
-			<h1 className="mb-8 text-4xl font-semibold tracking-tight">All Orders</h1>
+		<div className="max-w-4xl mx-auto py-8">
+			<h1 className="mb-8 text-4xl font-semibold tracking-tight">My Orders</h1>
 			<div className="space-y-4">
 				{orders.map((order) => (
 					<Link
@@ -35,7 +31,7 @@ function AdminOrdersPage() {
 						<div className="flex items-center gap-6">
 							<OrderStatusBadge status={order.status} />
 							<span className="text-[#0071e3] font-medium group-hover:underline hidden sm:block">
-								Manage
+								View Details
 							</span>
 						</div>
 					</Link>
